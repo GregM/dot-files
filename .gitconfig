@@ -1,8 +1,50 @@
 [user]
-  email = myemail@emailprovider.com
+  email = gregory.mazurek@gmail.com
+  name = Gregory Mazurek
+
 [push]
     default = current
+
 [color]
-    ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+    
 [alias]
+    # Show well organized git history
     hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    
+    # Show git log
+    # from http://blog.blindgaenger.net/advanced_git_aliases.html
+    alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ =  \\2/' | sort
+    
+    # Show our tags
+    # https://github.com/SixArm/sixarm_git_gitconfig/blob/master/gitconfig.d/alias.txt
+    tags = tag -n1 -l
+    
+    # Find text in any commit ever
+    # https://github.com/SixArm/sixarm_git_gitconfig/blob/master/gitconfig.d/alias.txt
+    grep-all = !"git rev-list --all | xargs git grep '$1'"
+    
+    # Sort by date for branches; can be useful for spring cleaning
+    # https://github.com/SixArm/sixarm_git_gitconfig/blob/master/gitconfig.d/alias.txt
+    refs-by-date = for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
+    
+    # Stash snapshot - from http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+    # Take a snapshot of your current working tree without removing changes.
+    # This is handy for refactoring where you can’t quite fit what you’ve done
+    # into a commit but daren’t stray too far from now without a backup.
+    #
+    # Running this:
+    #
+    #    $ git snapshot
+    #
+    # Creates this stash:
+    #
+    #    stash@{0}: On feature/handy-git-tricks: snapshot: Mon Apr 8 12:39:06 BST 2013
+    #
+    # And seemingly no changes to your working tree.
+    #
+    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
