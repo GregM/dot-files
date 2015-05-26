@@ -1,5 +1,5 @@
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export EDITOR=nano
+export EDITOR=vim
 export PAGER=less
 export LESS='-iMRx4 -FX'
 export HISTCONTROL=ignoredups
@@ -18,3 +18,13 @@ if [[ ${EUID} == 0 ]] ; then
 else
   export PS1='\[\033[01m\][ \[\033[01;34m\]\u@\h \[\033[00m\]\[\033[01m\]] \[\033[01;32m\]\w\[\033[00m\]\n\[\033[01;34m\]$\[\033[00m\] $(get-current-color)> '
 fi
+
+gitsetproxy() {
+  git config --global http.proxy http://<PROXY_HERE>
+  git config --global http.sslverify false
+}
+
+gitunsetproxy() {
+  git config --global --unset http.proxy
+  git config --global http.sslverify true
+}
