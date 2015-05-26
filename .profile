@@ -11,12 +11,12 @@ export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
 export WEB=/web
 
 alias get-current-branch="git branch 2>/dev/null | grep '^*' | colrm 1 2"
-alias get-current-color="if [[ \$(get-current-branch) == \"master\" ]] ; then echo \"1;33m\" ; else echo \"0m\" ; fi"
+alias get-current-color="if [[ \$(get-current-branch) == \"master\" ]] ; then echo \"01;33m\" ; else echo \"00m\" ; fi"
 
 if [[ ${EUID} == 0 ]] ; then
-   export PS1='\[\033[01m\][ \[\033[01;31m\]\u@\h \[\033[00m\]\[\033[01m\]] \[\033[01;32m\]\w\[\033[00m\]\n\[\033[01;31m\]$\[\033[00m\] $(get-current-color)> '
+    export PS1='\[\033[01m\][ \[\033[01;31m\]\u@\h \[\033[00m\]\[\033[01m\]] \[\033[01;32m\]\w\[\033[00m\]\n\[\033[01;31m\]$\[\033[00m\] \[\033[$(get-current-color)\]$(get-current-branch)\[\033[01m\] > \[\033[00m\]'
 else
-  export PS1='\[\033[01m\][ \[\033[01;34m\]\u@\h \[\033[00m\]\[\033[01m\]] \[\033[01;32m\]\w\[\033[00m\]\n\[\033[01;34m\]$\[\033[00m\] $(get-current-color)> '
+    export PS1='\[\033[01m\][ \[\033[01;34m\]\u@\h \[\033[00m\]\[\033[01m\]] \[\033[01;32m\]\w\[\033[00m\]\n\[\033[01;34m\]$\[\033[00m\] \[\033[$(get-current-color)\]$(get-current-branch)\[\033[01m\] > \[\033[00m\]'
 fi
 
 gitsetproxy() {
