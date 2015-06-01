@@ -1,6 +1,6 @@
 dot-files
 =========
 
-preferences, not-so-often maintained
+preferences, not-so-often maintained.
 
 sym-link the files to ~
